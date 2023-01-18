@@ -13,7 +13,9 @@ class Pub:
                 return drink
 
     def sell_drink_to_customer(self, name, customer):
-        drink = self.find_drink_by_name(name)
-        customer.decrease_wallet(drink.price)
-        self.increase_till(drink.price)
-        
+        if customer.over_age() == True and customer.drunkenness <= 5:
+            drink = self.find_drink_by_name(name)
+            customer.decrease_wallet(drink.price)
+            self.increase_till(drink.price)
+            customer.add_drunkenness(drink)
+
